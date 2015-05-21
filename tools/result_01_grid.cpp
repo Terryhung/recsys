@@ -22,14 +22,14 @@ int main(int argc, char **argv) {
     memset(ans, 0, sizeof(ans));
     while (!feof(fa) && !feof(fb)) {
         if (!fgets(s, BUF_SIZE, fa)) break;
-        if(!(s[0]=='1'||s[0]=='0')) break;
+        if (!(s[0]=='1'||s[0]=='0')) break;
         a = (s[0]=='1');
 
         if (!fgets(s, BUF_SIZE, fb)) break;
-        if(!(s[0]=='1'||s[0]=='0')) break;
+        if (!(s[0]=='1'||s[0]=='0')) break;
         b = (s[0]=='1');
 
-        ans[a][b]++;
+        ans[b][a]++;
     }
     puts(  "          predict 0   predict 1");
     printf("answer 0  %9d   %9d\n", ans[0][0], ans[1][0]);
