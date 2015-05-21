@@ -55,7 +55,7 @@ def main():
             i += 1
             if i%100000==0:
                 print str(i) + " data ok."
-                print "    now session_id="+s.session_id
+                print "    now session_id="+str(s.session_id)
             s = Session("click")
     
 
