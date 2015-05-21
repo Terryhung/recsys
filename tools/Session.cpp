@@ -245,7 +245,7 @@ public:
         if (click_infos!=NULL)
             delete [] click_infos;
         if (buy_infos!=NULL)
-            delete [] click_infos;
+            delete [] buy_infos;
         click_infos = NULL;
         buy_infos = NULL;
         *this = Session();

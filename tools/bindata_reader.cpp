@@ -29,25 +29,42 @@ vector<int> make_mapping_table(map<int, int> mp) {
     sort(res.begin(), res.end());
     return res;
 }
+struct Unioner{
+    vector<int> ary;
+    Unioner() { ary=vector<int>(); }
+    void add(int a) { ary.push_back(a); }
+    vector<pair<int,int> > res() {
+        vector<pair<int,int> > res = vector<pair<int,int> >();
+        sort(ary.begin(), ary.end());
+        ary.push_back(-1);
+        for (int i=0,j=1; i<ary.size()-1; i++, j++)
+            if (ary[i]!=ary[i+1]) {
+                res.push_back(make_pair(ary[i], j));
+                j = 1;
+            }
+        return res;
+    }
+};
 int main(int argc, char** argv) {
     Session sn = Session(Session::CLICK);
     if (argc!=2) {
         puts("usage:");
         puts("\tbindata_reader bin_data_name");
+        return 0;
     }
     FILE *f = fopen(argv[1], "rb");
     if (f)
-        puts("ready to read");
+        fprintf(stderr, "ready to read");
     else {
-        puts("file open error");
+        fprintf(stderr, "file open error");
         exit(0);
     }
     unsigned int mn = ~0, mx=0;
-    map<int, int> mp_item_id, mp_brand;
     int cate[16];
     int month[12];
     int hour[24];
-    vector<int> item_id_table, brand_table;
+    vector<pair<int, int> > item_id_table, brand_table;
+    Unioner item_id_unioner, brand_unioner;
     memset(cate, 0, sizeof(cate));
     memset(month, 0, sizeof(month));
     memset(hour, 0, sizeof(hour));
@@ -55,43 +72,36 @@ int main(int argc, char** argv) {
     FILE *out_brand = fopen("brand_table.txt", "w");
     if (!out_item_id) { puts("fopen item_id error"); return 0; }
     if (!out_brand) { puts("fopen brand error"); return 0; }
+    fprintf(stderr, "reading data...");
     while (sn.read_binary(f), !sn.empty()) {
         for (int i=0; i<sn.len(); i++ ) {
-            mn = std::min(mn, sn.click(i).item_id); 
-            mx = std::max(mx, sn.click(i).item_id); 
-            if (mp_item_id.find(sn.click(i).item_id)!=mp_item_id.end()) {
-                mp_item_id[sn.click(i).item_id] = mp_item_id[sn.click(i).item_id] + 1;
-            } else {
-                mp_item_id[sn.click(i).item_id] = 1;
-            }
-            if (sn.click(i).cate>12) {
-                if (mp_brand.find(sn.click(i).cate)!=mp_brand.end()) {
-                    mp_brand[sn.click(i).cate] = mp_brand[sn.click(i).item_id] + 1;
-                } else {
-                    mp_brand[sn.click(i).item_id] = 1;
-                }
-            }
+            item_id_unioner.add(sn.click(i).item_id);
+            if (sn.click(i).cate>12)
+                brand_unioner.add(sn.click(i).cate);
             cate[sn.click(i).cate<=12 ? sn.click(i).cate>=1 ? sn.click(i).cate : 13 : 14 ]++;
             month[sn.click(i).m()]++;
             hour[sn.click(i).h()]++;
         }
     }
-    printf("min of item id:%d\n", mn);
-    printf("max of item id:%d\n", mx);
-    printf("total number of item:%lu\n", mp_item_id.size());
+    fprintf(stderr, "sorting %lu item id and %lu brand...", item_id_unioner.ary.size(), brand_unioner.ary.size());
+    item_id_table = item_id_unioner.res();
+    brand_table = brand_unioner.res();
+    fprintf(stderr, "sort done");
+    printf("min of item id:%d\n", item_id_table[0].first);
+    printf("max of item id:%d\n", item_id_table[item_id_table.size()-1].first);
+    printf("total number of item:%lu\n", item_id_unioner.ary.size());
     printf("# of items in each cate:\n\
 \t(13 for special offers, 14 for # of other brand, 15 for # items of other brand)\n");
+    cate[15] = brand_unioner.ary.size();
     print_table(cate, 4, 4);
     printf("# of items in each month:\n");
     print_table(month, 3, 4);
     printf("# of items in each hour:\n");
     print_table(hour, 6, 4);
-    item_id_table = make_mapping_table(mp_item_id);
-    brand_table = make_mapping_table(mp_brand);
     for (int i=0; i<item_id_table.size(); i++)
-        fprintf(out_item_id, "%d:%d:%d\n", i+1, item_id_table[i], mp_item_id[item_id_table[i]]);
+        fprintf(out_item_id, "%d:%d:%d\n", i+1, item_id_table[i].first, item_id_table[i].second);
     for (int i=0; i<brand_table.size(); i++)
-        fprintf(out_brand, "%d:%d:%d\n", i+1, brand_table[i], mp_brand[brand_table[i]]);
+        fprintf(out_brand, "%d:%d:%d\n", i+1, brand_table[i].first, brand_table[i].second);
 	return 0;
 }
 
