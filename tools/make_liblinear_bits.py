@@ -11,10 +11,9 @@ import sys
 
 def write(y, se, f):
     s = str(y)+" "
-    nw = 1
-    se.click_info.sort(key=lambda x:x.item_id)
+    data_tool.session_sort_info_by_item_id(se)
     lastitem = None
-    for item in se.click_info:
+    for item in se.info:
         if lastitem!=None:
             if item.item_id==lastitem.item_id:
                 continue
@@ -39,7 +38,6 @@ def main():
         while s.read_binary(f).session_id!=0:
             s_buy.append(s)
             s = Session("buy")
-            break
     data_tool.session_reduce_id_brand(s_buy, item_id_map, brand_map)
     print "Read buy data ok."
     s_buy.sort(key=lambda x:x.session_id)
@@ -52,7 +50,6 @@ def main():
         s = Session("click")
         while s.read_binary(f).session_id!=0:
             data_tool.session_reduce_id_brand(s, item_id_map, brand_map)
-            data_tool.session_sort_info_by_item_id(s)
             if s.session_id==s_buy[nw_buy]:
                 write(1, s, out)
                 nw_buy += 1

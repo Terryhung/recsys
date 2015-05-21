@@ -107,50 +107,45 @@ class Session:
     def __init__(self, info_type):
         self.session_id = -1
         self.num_click = -1
-        self.click_info = []
-        self.buy_info = []
+        self.info = []
         self.info_type = info_type
     def UPI(self, b):
         return struct.unpack("<L", b)[0]
     def PI(self, n):
         return struct.pack("<L", n)
     def read_binary(self, f):
-        self.click_info = []
-        self.buy_info = []
+        self.info = []
         self.session_id = self.UPI(f.read(4))
         self.num_click = self.UPI(f.read(4))
-        if self.info_type=="click":
-            for i in xrange(self.num_click):
+        for i in xrange(self.num_click):
+            if self.info_type=="click":
                 date = self.UPI(f.read(4))
                 cate = self.UPI(f.read(4))
                 item_id = self.UPI(f.read(4))
-                self.click_info.append(ClickInfo(date, cate, item_id))
-        elif self.info_type=="buy":
-            for i in xrange(self.num_click):
+                self.info.append(ClickInfo(date, cate, item_id))
+            elif self.info_type=="buy":
                 date = self.UPI(f.read(4))
                 item_id = self.UPI(f.read(4))
                 price = self.UPI(f.read(4))
                 quan = self.UPI(f.read(4))
-                self.buy_info.append(BuyInfo(date, item_id, price, quan))
+                self.info.append(BuyInfo(date, item_id, price, quan))
         return self
     def write_binary(self, f):
         f.write(PI(self.session_id))
         f.write(PI(self.num_click))
-        if self.info_type=="click":
-            for ci in self.click_info:
-                f.write(PI(ci.date))
-                f.write(PI(ci.cate))
-                f.write(PI(ci.item_id))
-        elif self.info_type=="buy":
-            for bi in self.buy_info:
-                f.write(PI(bi.date))
-                f.write(PI(bi.item_id))
-                f.write(PI(bi.price))
-                f.write(PI(bi.quan))
+        for i in self.info:
+            if self.info_type=="click":
+                f.write(PI(i.date))
+                f.write(PI(i.cate))
+                f.write(PI(i.item_id))
+            elif self.info_type=="buy":
+                f.write(PI(i.date))
+                f.write(PI(i.item_id))
+                f.write(PI(i.price))
+                f.write(PI(i.quan))
         return self
     def make_end(self):
-        self.click_info = None
-        self.buy_info = None
+        self.info = None
         self.session_id = 0
         self.num_click = 0
 
