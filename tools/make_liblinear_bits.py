@@ -9,7 +9,20 @@ import sys
     NOT for predicting the "buy set"
 """
 
-def write(y, se, f):
+def item_feature_maker_month_hour(item):
+    s = str(36*item.item_id +    item.m()) + ":1 "
+    s += str(36*item.item_id + 12+item.h()) + ":1 "
+    return s
+
+def item_feature_maker_month_cate(item):
+    s  = str(27*item.item_id +    item.m()) + ":1 "
+    if item.cate>=14:
+        s += str(27*item.item_id + 12+14) + ":1 "
+    else:
+        s += str(27*item.item_id + 12+item.cate) + ":1 "
+    return s
+
+def write(y, se, f, item_feature_maker):
     s = str(y)+" "
     data_tool.session_sort_info_by_item_id(se)
     lastitem = None
@@ -18,8 +31,7 @@ def write(y, se, f):
             if item.item_id==lastitem.item_id:
                 continue
         lastitem = item
-        s += str(36*item.item_id +    item.m()) + ":1 "
-        s += str(36*item.item_id + 12+item.h()) + ":1 "
+        s += item_feature_maker(item)
     print >>f, s[:-1]
     
 
@@ -49,9 +61,9 @@ def main():
         while s.read_binary(f).session_id!=0:
             data_tool.session_reduce_id_brand(s, item_id_map, brand_map)
             if buy_id.get(s.session_id)!=None:
-                write(1, s, out)
+                write(1, s, out, item_feature_maker_month_cate)
             else:
-                write(0, s, out)
+                write(0, s, out, item_feature_maker_month_cate)
             i += 1
             if i%100000==0:
                 print str(i) + " data ok."
