@@ -42,6 +42,7 @@ struct Unioner{
                 res.push_back(make_pair(ary[i], j));
                 j = 1;
             }
+        ary.erase(ary.end()-1);
         return res;
     }
 };
@@ -73,12 +74,13 @@ int main(int argc, char** argv) {
     if (!out_item_id) { puts("fopen item_id error"); return 0; }
     if (!out_brand) { puts("fopen brand error"); return 0; }
     fprintf(stderr, "reading data...");
+    int j=0;
     while (sn.read_binary(f), !sn.empty()) {
         for (int i=0; i<sn.len(); i++ ) {
             item_id_unioner.add(sn.click(i).item_id);
             if (sn.click(i).cate>12)
                 brand_unioner.add(sn.click(i).cate);
-            cate[sn.click(i).cate<=12 ? sn.click(i).cate>=1 ? sn.click(i).cate : 13 : 14 ]++;
+            cate[sn.click(i).cate<=12 ? (sn.click(i).cate>=0 ? sn.click(i).cate : 13) : 14 ]++;
             month[sn.click(i).m()]++;
             hour[sn.click(i).h()]++;
         }
@@ -86,13 +88,15 @@ int main(int argc, char** argv) {
     fprintf(stderr, "sorting %lu item id and %lu brand...", item_id_unioner.ary.size(), brand_unioner.ary.size());
     item_id_table = item_id_unioner.res();
     brand_table = brand_unioner.res();
-    fprintf(stderr, "sort done");
+    fprintf(stderr, "sort done\n");
     printf("min of item id:%d\n", item_id_table[0].first);
     printf("max of item id:%d\n", item_id_table[item_id_table.size()-1].first);
     printf("total number of item:%lu\n", item_id_unioner.ary.size());
+    printf("total number of different item:%lu\n", item_id_table.size());
+    printf("total number of different brand:%lu\n", brand_table.size());
     printf("# of items in each cate:\n\
-\t(13 for special offers, 14 for # of other brand, 15 for # items of other brand)\n");
-    cate[15] = brand_unioner.ary.size();
+\t(13 for special offers, 14 for # items of other brand, 15 for # of brand)\n");
+    cate[15] = brand_table.size();
     print_table(cate, 4, 4);
     printf("# of items in each month:\n");
     print_table(month, 3, 4);
