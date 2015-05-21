@@ -43,6 +43,7 @@ struct Unioner{
                 res.push_back(make_pair(ary[i], j));
                 j = 1;
             }
+        ary.erase(ary.end()-1);
         return res;
     }
 };
@@ -72,13 +73,22 @@ int main(int argc, char** argv) {
     FILE *out_brand = fopen("brand_table.txt", "w");
     if (!out_item_id) { puts("fopen item_id error"); return 0; }
     if (!out_brand) { puts("fopen brand error"); return 0; }
+<<<<<<< HEAD
     fprintf(stderr, "reading data...\n");
+=======
+    fprintf(stderr, "reading data...");
+    int j=0;
+>>>>>>> 3f5babba5bf7c8651ebc3851d61285b0eebca6cf
     while (sn.read_binary(f), !sn.empty()) {
         for (int i=0; i<sn.len(); i++ ) {
             item_id_unioner.add(sn.click(i).item_id);
             if (sn.click(i).cate>12)
                 brand_unioner.add(sn.click(i).cate);
+<<<<<<< HEAD
             cate[sn.click(i).cate<=12 ? sn.click(i).cate>=0 ? sn.click(i).cate : 13 : 14 ]++;
+=======
+            cate[sn.click(i).cate<=12 ? (sn.click(i).cate>=0 ? sn.click(i).cate : 13) : 14 ]++;
+>>>>>>> 3f5babba5bf7c8651ebc3851d61285b0eebca6cf
             month[sn.click(i).m()]++;
             hour[sn.click(i).h()]++;
         }
@@ -94,7 +104,11 @@ int main(int argc, char** argv) {
     printf("total number of different item:%lu\n", item_id_table.size());
     printf("total number of different brand:%lu\n", brand_table.size());
     printf("# of items in each cate:\n\
+<<<<<<< HEAD
 \t(13 for special offers, 14 for # items of brand, 15 for # of brand)\n");
+=======
+\t(13 for special offers, 14 for # items of other brand, 15 for # of brand)\n");
+>>>>>>> 3f5babba5bf7c8651ebc3851d61285b0eebca6cf
     cate[15] = brand_table.size();
     print_table(cate, 4, 4);
     printf("# of items in each month:\n");
