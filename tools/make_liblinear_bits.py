@@ -34,19 +34,13 @@ def main():
     brand_map = data_tool.get_reduced_id_mapping("./brand_table.txt")
     brand_map[4294967295] = 13
     print "Start to read buy data."
+    buy_id = {}
     with open(sys.argv[2], "r") as f:
         s = Session("buy")
         while s.read_binary(f).session_id!=0:
-            s_buy.append(s)
+            buy_id[s.session_id] = 1
             s = Session("buy")
-    s = Session("buy")
-    s.session_id = 2**32-1
-    s_buy.append(s)
-    data_tool.session_reduce_id_brand(s_buy, item_id_map, brand_map)
     print "Read buy data ok."
-    s_buy.sort(key=lambda x:x.session_id)
-    s_buy.append(Session("buy"))
-    print "Sort buy data ok."
     print "Start to write to "+sys.argv[3]
     nw_buy = 0
     i = 0
@@ -54,12 +48,8 @@ def main():
         s = Session("click")
         while s.read_binary(f).session_id!=0:
             data_tool.session_reduce_id_brand(s, item_id_map, brand_map)
-            if s.session_id==s_buy[nw_buy]:
+            if buy_id.get(s.session_id)!=None:
                 write(1, s, out)
-                nw_buy += 1
-            elif s.session_id>s_buy[nw_buy]: 
-                write(0, s, out)
-                nw_buy += 1
             else:
                 write(0, s, out)
             i += 1
