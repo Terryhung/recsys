@@ -39,6 +39,9 @@ def main():
         while s.read_binary(f).session_id!=0:
             s_buy.append(s)
             s = Session("buy")
+    s = Session("buy")
+    s.session_id = 2**32-1
+    s_buy.append(s)
     data_tool.session_reduce_id_brand(s_buy, item_id_map, brand_map)
     print "Read buy data ok."
     s_buy.sort(key=lambda x:x.session_id)
@@ -53,6 +56,9 @@ def main():
             data_tool.session_reduce_id_brand(s, item_id_map, brand_map)
             if s.session_id==s_buy[nw_buy]:
                 write(1, s, out)
+                nw_buy += 1
+            elif s.session_id>s_buy[nw_buy]: 
+                write(0, s, out)
                 nw_buy += 1
             else:
                 write(0, s, out)
