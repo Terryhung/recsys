@@ -19,6 +19,7 @@ int main(int argc, char **argv) {
         puts("usage:");
         puts("\tdata_refiner bin_data_name out_data_name threshold");
         puts("\t\twill only save session with num_click>threshold");
+        return 0;
     }
     FILE *f = fopen(argv[1], "rb"), *out = fopen(argv[2], "wb");
     if (f)
