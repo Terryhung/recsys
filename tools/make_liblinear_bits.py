@@ -16,7 +16,6 @@ def write(y, se, f):
     for item in se.click_info:
         s += str(36*item.item_id +    item.m()) + ":1 "
         s += str(36*item.item_id + 12+item.h()) + ":1 "
-        break
     print >>f, s[:-1]
     
 
