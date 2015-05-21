@@ -32,6 +32,7 @@ def main():
     print "initializing..."
     item_id_map = data_tool.get_reduced_id_mapping("./item_id_table.txt")
     brand_map = data_tool.get_reduced_id_mapping("./brand_table.txt")
+    brand_map[4294967295] = 13
     print "Start to read buy data."
     with open(sys.argv[2], "r") as f:
         s = Session("buy")
