@@ -26,5 +26,11 @@ def session_reduce_id_brand(sessions, item_id_map, brand_map):
         one_session_reduce_id_brand(sessions)
     else:
         raise AssertionError("Should be Session/list of Session : "+str(type(sessions[0])))
-            
+
+def session_sort_info_by_item_id(sessions):
+    if sessions.info_type=='click':
+        sessions.click_info.sort(key=lambda x:x.item_id)
+    elif sessions.info_type=='buy':
+        sessions.buy_info.sort(key=lambda x:x.item_id)
+
 
