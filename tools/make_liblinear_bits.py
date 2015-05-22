@@ -31,11 +31,10 @@ def item_feature_maker_cate(item):
 
 def item_feature_maker_spec_offer(item):
     if item.cate==13:
-        s = str(27*item.item_id + 1) + ":1 "
+        s = str(2*item.item_id + 1) + ":1 "
     else:
-        s = str(27*item.item_id ) + ":1 "
+        s = str(2*item.item_id + 0) + ":1 "
     return s
-
 
 def write(y, se, f, item_feature_maker):
     s = str(y)+" "
