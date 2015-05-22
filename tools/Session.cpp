@@ -6,7 +6,7 @@
 #include <cmath>
 #include <algorithm>
 
-const int BUF_SIZE = 3000;
+static const int BUF_SIZE = 3000;
 /*
  * an example of read all data:
  
