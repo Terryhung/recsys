@@ -29,6 +29,14 @@ def item_feature_maker_cate(item):
         s = str(27*item.item_id + 12+item.cate) + ":1 "
     return s
 
+def item_feature_maker_spec_offer(item):
+    if item.cate==13:
+        s = str(27*item.item_id + 1) + ":1 "
+    else:
+        s = str(27*item.item_id ) + ":1 "
+    return s
+
+
 def write(y, se, f, item_feature_maker):
     s = str(y)+" "
     data_tool.session_sort_info_by_item_id(se)
@@ -63,7 +71,7 @@ def main():
     print "Start to write to "+sys.argv[3]
     nw_buy = 0
     i = 0
-    item_feature_maker = item_feature_maker_cate
+    item_feature_maker = item_feature_maker_spec_offer
     with open(sys.argv[1], "r") as f, open(sys.argv[3], "w") as out:
         s = Session("click")
         while s.read_binary(f).session_id!=0:
