@@ -27,13 +27,15 @@ int main() {
     fclose(item_id_f);
     sort(ary.begin(), ary.end());
     printf("total : %lu items\n", ary.size());
-    int p = 0, acc = 0;
+    int p = 0, acc = 0, total = 0;
+    for (int i=0; i<ary.size(); i++)
+        total += ary[i];
     for (int i=1; p!=ary.size()-1; i*=2) {
         while (p<ary.size()-1 && ary[p]<i) {
             acc += ary[p];
             p++;
         }
-        printf("%5d item got less than %8d clicks. (total %9d clicks)\n", p+1, ary[p], acc);
+        printf("%5d item got more than %8d clicks. (total %9d clicks) (if it\'s thres, purity:%f)\n", (ary.size()-p-1), ary[p], acc, (ary.size()*1.0/(ary.size()-p-1)) * (total-acc)*1.0/total);
     }
     
 
