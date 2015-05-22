@@ -37,3 +37,14 @@
     Best result till now.
     Still get negetive score through.
 
+6. 
+	Using feature "is special offer or not" with liblinear on {#click>10}
+        Accuracy = 69.076% (34538/50000)
+              predict 0   predict 1
+        answer 0      31836        6487
+        answer 1       8975        2702
+        (a1 p1) / (a0 p1) = 0.416525   (>1 then get positive score)
+    Best result ever.
+    So features are too much? In 3. 5. 6., we can see this tendency.
+    
+
