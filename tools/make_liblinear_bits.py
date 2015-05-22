@@ -69,6 +69,7 @@ def main():
                 print str(i) + " data ok."
                 print "    now session_id="+str(s.session_id)
             s = Session("click")
+    print "Done"
     
 
 if __name__=="__main__":

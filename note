@@ -23,3 +23,8 @@
 	         answer 1      7376        4301
 	Why??? cate should no effect to result?
 
+4.
+    Weighting in liblinear is useless orz.
+    Weighting only scale #(predict 1), but while scaling,
+    .#(predict 1 but is zero) increase with same ratio.
+    
