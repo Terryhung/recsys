@@ -22,6 +22,13 @@ def item_feature_maker_month_cate(item):
         s += str(27*item.item_id + 12+item.cate) + ":1 "
     return s
 
+def item_feature_maker_cate(item):
+    if item.cate>=14:
+        s = str(27*item.item_id + 12+14) + ":1 "
+    else:
+        s = str(27*item.item_id + 12+item.cate) + ":1 "
+    return s
+
 def write(y, se, f, item_feature_maker):
     s = str(y)+" "
     data_tool.session_sort_info_by_item_id(se)
@@ -56,19 +63,21 @@ def main():
     print "Start to write to "+sys.argv[3]
     nw_buy = 0
     i = 0
+    item_feature_maker = item_feature_maker_cate
     with open(sys.argv[1], "r") as f, open(sys.argv[3], "w") as out:
         s = Session("click")
         while s.read_binary(f).session_id!=0:
             data_tool.session_reduce_id_brand(s, item_id_map, brand_map)
             if buy_id.get(s.session_id)!=None:
-                write(1, s, out, item_feature_maker_month_cate)
+                write(1, s, out, item_feature_maker)
             else:
-                write(0, s, out, item_feature_maker_month_cate)
+                write(0, s, out, item_feature_maker)
             i += 1
             if i%100000==0:
                 print str(i) + " data ok."
                 print "    now session_id="+str(s.session_id)
             s = Session("click")
+    print "Done"
     
 
 if __name__=="__main__":

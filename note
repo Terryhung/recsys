@@ -1,0 +1,39 @@
+1.
+	If make the condition = (#click>10) , then
+		(#session) / (#buy) ~= 4
+	but overall is
+		(#session) / (#buy) ~= 50
+	SO it's a strong condition.
+
+2. 
+	Using feature "month/hour bit" with liblinear on {#click>10}
+	use 300000 to train, 50000 to valid:
+		correctness: 58%
+		           predict 0    predict 1
+		answer 0      24607       13716
+		answer 1       7031        4646
+	Which is doing nothingQQ 
+
+3. 
+	Using feature "month/cate bit" with liblinear on {#click>10}
+	use 300000 to train, 50000 to valid:
+		correctness: 62%
+		             predict 0   predict 1
+	         answer 0      26666      11657
+	         answer 1      7376        4301
+	Why??? cate should no effect to result?
+
+4.
+    Weighting in liblinear is useless orz.
+    Weighting only scale #(predict 1), but while scaling,
+    .#(predict 1 but is zero) increase with same ratio.
+
+5.
+    Using feature "cate bit" with liblinear on {#click>10}:
+        Accuracy = 67.234% (33617/50000)
+                  predict 0   predict 1
+        answer 0      30308        8015
+        answer 1       8368        3309
+    Best result till now.
+    Still get negetive score through.
+

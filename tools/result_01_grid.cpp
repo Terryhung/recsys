@@ -34,6 +34,7 @@ int main(int argc, char **argv) {
     puts(  "          predict 0   predict 1");
     printf("answer 0  %9d   %9d\n", ans[0][0], ans[1][0]);
     printf("answer 1  %9d   %9d\n", ans[0][1], ans[1][1]);
+    printf("(a1 p1) / (a0 p1) = %f   (>1 then get positive score)\n", ans[1][1]*1.0/ans[1][0]);
 	return 0;
 }
 
