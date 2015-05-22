@@ -250,6 +250,16 @@ public:
         buy_infos = NULL;
         *this = Session();
     }
+    int remove_items(bool (*func)(const ClickInfo)) {
+       int nw = 0;
+       for (int i=0; i<num_click; i++) {
+           if (!func(click_infos[i])) {
+               std::swap(click_infos[nw], click_infos[i]);
+               nw++;
+           }
+       }
+       num_click = nw;
+    }
     int id() const { return session_id; }
     int len() const { return num_click; }
     ClickInfo click(int i) { return click_infos[i]; }
