@@ -60,10 +60,22 @@
     (That is, the ratio of (a1 p1)/(a0 p1) * (buy/all) is unchanged)
     So, NOT features too much, but other reason.
     
-8. (important)
+8. (important) - better refine?
     by data_analysis, know if we delete item with (#click<512),
     we only delete 1/10 data from the dataset.
     Which we can reduce #data 52739->7879.
     then purity(?) of the data is 9/10*6.6 ~= 6
     we will got 6 times compact data with enough features to train.
+
+9.  a1/all = 0.226475 , (a1 p1) / (a0 p1) = 0.961202
+    Using feature "cate bits" with liblinear on refine(8, 512)
+        Accuracy = 77.2362% (61789/80000)    
+                  predict 0   predict 1
+        answer 0      59485        2397
+        answer 1      15814        2304
+        (a1 p1) / (a0 p1) = 0.961202   (>1 then get positive score)
+        #answer 1 = 18118
+        a1/all = 0.226475
+    After deleting redundence items, we reached score 0! orz
+    A big improve.
 
