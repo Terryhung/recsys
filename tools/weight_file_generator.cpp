@@ -19,7 +19,7 @@ int main(int argc, char **argv) {
     }
     FILE *in = fopen(argv[1], "r"), *out = fopen(strcat(strcpy(s,argv[1]), ".weight"), "w");
     int label, tmp;
-    float weight[2];
+    float weight[2]; 
     if (!in)  { puts("libsvm_fmt_data open error."); return 0; }
     if (!out) { puts("weight file open error."); return 0; }
     if (sscanf(argv[2], "%f", weight+0)!=1) { puts("0_weight wrong."); return 0; }
