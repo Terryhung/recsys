@@ -33,7 +33,7 @@ int main() {
             acc += ary[p];
             p++;
         }
-        printf("%5d item got less than %8d clicks.\n", p+1, ary[p]);
+        printf("%5d item got less than %8d clicks. (total %9d clicks)\n", p+1, ary[p], acc);
     }
     
 
