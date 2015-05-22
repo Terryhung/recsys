@@ -27,4 +27,13 @@
     Weighting in liblinear is useless orz.
     Weighting only scale #(predict 1), but while scaling,
     .#(predict 1 but is zero) increase with same ratio.
-    
+
+5.
+    Using feature "cate bit" with liblinear on {#click>10}:
+        Accuracy = 67.234% (33617/50000)
+                  predict 0   predict 1
+        answer 0      30308        8015
+        answer 1       8368        3309
+    Best result till now.
+    Still get negetive score through.
+
