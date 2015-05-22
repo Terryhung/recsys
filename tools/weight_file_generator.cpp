@@ -18,7 +18,7 @@ int main(int argc, char **argv) {
         return 0;
     }
     FILE *in = fopen(argv[1], "r"), *out = fopen(strcat(strcpy(s,argv[1]), ".weight"), "w");
-    int label;
+    int label, tmp;
     float weight[2];
     if (!in)  { puts("libsvm_fmt_data open error."); return 0; }
     if (!out) { puts("weight file open error."); return 0; }
@@ -28,7 +28,7 @@ int main(int argc, char **argv) {
     puts("initializing ok.");
     while (!feof(in)) {
         if (!fgets(s, BUF_SIZE, in)) break;
-        sscanf(s, "%d", &label);
+        if (sscanf(s, "%d:%d", &label, &tmp)==2) continue;
         fprintf(out, "%.2f\n", weight[label]);
     }
     fclose(in);
@@ -36,6 +36,6 @@ int main(int argc, char **argv) {
     puts("Done");
 
 
-	return 0;
+    return 0;
 }
 
