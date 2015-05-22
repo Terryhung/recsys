@@ -60,5 +60,10 @@
     (That is, the ratio of (a1 p1)/(a0 p1) * (buy/all) is unchanged)
     So, NOT features too much, but other reason.
     
-    
+8. (important)
+    by data_analysis, know if we delete item with (#click<512),
+    we only delete 1/10 data from the dataset.
+    Which we can reduce #data 52739->7879.
+    then purity(?) of the data is 9/10*6.6 ~= 6
+    we will got 6 times compact data with enough features to train.
 
