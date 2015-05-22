@@ -39,7 +39,7 @@ int main(int argc, char** argv) {
     memset(cate, 0, sizeof(cate));
     memset(month, 0, sizeof(month));
     memset(hour, 0, sizeof(hour));
-    fprintf(stderr, "reading data...");
+    fprintf(stderr, "reading data...\n");
     int num_session=0, num_click=0;
     while (sn.read_binary(f), !sn.empty()) {
         num_session++;
