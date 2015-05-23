@@ -18,10 +18,10 @@ int main(int argc, char **argv) {
         return 0;
     }
     FILE *in = fopen(argv[1], "r"), *outp, *outv;
-    if (!in) { puts("item_id_table.txt open error."); return 0; }
+    if (!in) { puts("data open error."); return 0; }
     strcpy(s, argv[1]);
     s[strlen(s)-4] = '\0';
-    strcat(s, "-parital.dat");
+    strcat(s, "-partial.dat");
     outp = fopen(s, "w");
     if (!outp) { puts("out partial file open error."); return 0; }
     strcpy(s, argv[1]);
