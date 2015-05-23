@@ -24,9 +24,9 @@ def item_feature_maker_month_cate(item):
 
 def item_feature_maker_cate(item):
     if item.cate>=14:
-        s = str(27*item.item_id + 12+14) + ":1 "
+        s = str(15*item.item_id + 14) + ":1 "
     else:
-        s = str(27*item.item_id + 12+item.cate) + ":1 "
+        s = str(15*item.item_id + item.cate) + ":1 "
     return s
 
 def item_feature_maker_spec_offer(item):
