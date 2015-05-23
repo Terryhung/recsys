@@ -38,6 +38,8 @@ int main(int argc, char **argv) {
         else 
             fputs(s, outv);
     }
+    fclose(outp);
+    fclose(outv);
     puts("Done");
     
 	return 0;
