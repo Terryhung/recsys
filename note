@@ -79,3 +79,14 @@
     After deleting redundence items, we reached score 0! orz
     A big improve.
 
+10. a1/all = 0.222587 , (a1 p1) / (a0 p1) = 0.380659
+    Using feature "spec offer" with liblinear on refine(8, 512)
+        Accuracy = 72.4575% (57966/80000)
+                  predict 0   predict 1
+        answer 0      55368        6825
+        answer 1      15209        2598
+        (a1 p1) / (a0 p1) = 0.380659   (>1 then get positive score)
+        #answer 1 = 17807
+        a1/all = 0.222587
+    only "spec offer" is bad this time.
+
