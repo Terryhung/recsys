@@ -1,4 +1,4 @@
-1.
+1. 
 	If make the condition = (#click>10) , then
 		(#session) / (#buy) ~= 4
 	but overall is
