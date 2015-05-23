@@ -24,16 +24,9 @@ def item_feature_maker_month_cate(item):
 
 def item_feature_maker_cate(item):
     if item.cate>=14:
-        s = str(27*item.item_id + 12+14) + ":1 "
+        s = str(15*item.item_id + 14) + ":1 "
     else:
-        s = str(27*item.item_id + 12+item.cate) + ":1 "
-    return s
-
-def item_feature_maker_spec_offer(item):
-    if item.cate==13:
-        s = str(2*item.item_id + 1) + ":1 "
-    else:
-        s = str(2*item.item_id + 0) + ":1 "
+        s = str(15*item.item_id + item.cate) + ":1 "
     return s
 
 def write(y, se, f, item_feature_maker):
@@ -70,7 +63,7 @@ def main():
     print "Start to write to "+sys.argv[3]
     nw_buy = 0
     i = 0
-    item_feature_maker = item_feature_maker_spec_offer
+    item_feature_maker = item_feature_maker_cate
     with open(sys.argv[1], "r") as f, open(sys.argv[3], "w") as out:
         s = Session("click")
         while s.read_binary(f).session_id!=0:
