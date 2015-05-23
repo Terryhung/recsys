@@ -78,6 +78,7 @@
         a1/all = 0.226475
     After deleting redundence items, we reached score 0! orz
     A big improve.
+    * I can't achieve this twice. I picked wrong file to train/test?
 
 10. a1/all = 0.222587 , (a1 p1) / (a0 p1) = 0.380659
     Using feature "spec offer" with liblinear on refine(8, 512)
@@ -89,4 +90,26 @@
         #answer 1 = 17807
         a1/all = 0.222587
     only "spec offer" is bad this time.
+
+11. a1/all = 0.249695 , (a1 p1) / (a0 p1) = 0.760697 , refine(8, 4096)
+    Using feature "cate bits" with liblinear on refine(8, 4096)
+        Accuracy = 73.8805% (40604/54959)
+        ./tools/result_01_grid $liblinearprefix-valid.dat res.txt
+                  predict 0   predict 1
+        answer 0      38595        2641
+        answer 1      11714        2009
+        (a1 p1) / (a0 p1) = 0.760697   (>1 then get positive score)
+        #answer 1 = 13723
+        a1/all = 0.249695
+
+12. a1/all = 0.307224 , (a1 p1) / (a0 p1) = 0.648188 , refine(32, 512)
+        Accuracy = 62.5812% (1542/2464)
+        ./tools/result_01_grid $liblinearprefix-valid.dat res.txt
+                  predict 0   predict 1
+        answer 0       1238         469
+        answer 1        453         304
+        (a1 p1) / (a0 p1) = 0.648188   (>1 then get positive score)
+        #answer 1 = 757
+        a1/all = 0.307224
+
 
