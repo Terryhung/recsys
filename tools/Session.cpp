@@ -242,6 +242,7 @@ public:
         return *this;
     }
     void del() {
+        int _type = info_type;
         if (click_infos!=NULL)
             delete [] click_infos;
         if (buy_infos!=NULL)
@@ -249,6 +250,7 @@ public:
         click_infos = NULL;
         buy_infos = NULL;
         *this = Session();
+        this->info_type = _type;
     }
     int remove_items(bool (*func)(const ClickInfo)) {
        int nw = 0;
