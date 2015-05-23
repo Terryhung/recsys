@@ -29,6 +29,13 @@ def item_feature_maker_cate(item):
         s = str(15*item.item_id + item.cate) + ":1 "
     return s
 
+def item_feature_maker_spec_offer(item):
+    if item.cate==13:
+        s = str(2*item.item_id + 1) + ":1 "
+    else:
+        s = str(2*item.item_id + 0) + ":1 "
+    return s
+
 def write(y, se, f, item_feature_maker):
     s = str(y)+" "
     data_tool.session_sort_info_by_item_id(se)
