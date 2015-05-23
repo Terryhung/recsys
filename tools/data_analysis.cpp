@@ -13,14 +13,20 @@
 using namespace std;
 
 char s[BUF_SIZE];
-int main() {
+int main(int argc, char **argv) {
     FILE *item_id_f, *click_f, *buy_f;
+    if (argc!=2) {
+        puts("Usage:");
+        puts("\tdata_analysis click_dat_name");
+        return 0;
+    }
+
     puts("Should execute this program in \'recsys\' folder.");
     item_id_f = fopen("item_id_table.txt", "rb");
-    click_f = fopen("out-click-all.dat", "rb");
+    click_f = fopen(argv[1], "rb");
     buy_f = fopen("out-buy-all.dat", "rb");
     if (!item_id_f) { puts("item_id_table.txt open error."); return 0; }
-    if (!click_f) { puts("out-click-all.dat open error."); return 0; }
+    if (!click_f) { puts("click_dat open error."); return 0; }
     if (!buy_f) { puts("out-buy-all.dat open error."); return 0; }
     int pos, id, num;
     vector<int> ary;

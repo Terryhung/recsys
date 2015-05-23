@@ -1,0 +1,37 @@
+Should execute this program in 'recsys' folder.
+total : 52739 items
+52738 item got more than        2 clicks. (total         0 clicks) (if it's thres, purity:1.000019)
+52738 item got more than        2 clicks. (total         0 clicks) (if it's thres, purity:1.000019)
+42941 item got more than        4 clicks. (total     23734 clicks) (if it's thres, purity:1.227292)
+34934 item got more than        8 clicks. (total     65377 clicks) (if it's thres, purity:1.506690)
+29044 item got more than       16 clicks. (total    129315 clicks) (if it's thres, purity:1.808728)
+24448 item got more than       32 clicks. (total    232335 clicks) (if it's thres, purity:2.142029)
+20281 item got more than       64 clicks. (total    421639 clicks) (if it's thres, purity:2.567246)
+16141 item got more than      128 clicks. (total    801914 clicks) (if it's thres, purity:3.188131)
+11818 item got more than      256 clicks. (total   1598862 clicks) (if it's thres, purity:4.246756)
+ 7879 item got more than      512 clicks. (total   3034819 clicks) (if it's thres, purity:6.079098)
+ 5058 item got more than     1024 clicks. (total   5070442 clicks) (if it's thres, purity:8.827513)
+ 3236 item got more than     2048 clicks. (total   7676671 clicks) (if it's thres, purity:12.512841)
+ 1963 item got more than     4096 clicks. (total  11353051 clicks) (if it's thres, purity:17.639437)
+  953 item got more than     8203 clicks. (total  17183347 clicks) (if it's thres, purity:26.573448)
+  309 item got more than    16389 clicks. (total  24615636 clicks) (if it's thres, purity:43.582327)
+   62 item got more than    32851 clicks. (total  30029272 clicks) (if it's thres, purity:77.902641)
+    5 item got more than    66068 clicks. (total  32455854 clicks) (if it's thres, purity:191.713542)
+    0 item got more than   147420 clicks. (total  32909262 clicks) (if it's thres, purity:inf)
+reading data...
+reading done
+sorting done
+9249729 session clicks, 509697 sessions buy.
+There are 1259710 sessions with #click<=2. Have 22363 session buys. (ratio:1.775%)
+There are 4817797 sessions with #click<=3. Have 132320 session buys. (ratio:2.746%)
+There are 7367044 sessions with #click<=4. Have 263666 session buys. (ratio:3.579%)
+There are 8272853 sessions with #click<=7. Have 343021 session buys. (ratio:4.146%)
+There are 8889767 sessions with #click<=10. Have 427024 session buys. (ratio:4.804%)
+There are 9107161 sessions with #click<=15. Have 471541 session buys. (ratio:5.178%)
+There are 9196145 sessions with #click<=23. Have 494449 session buys. (ratio:5.377%)
+There are 9234256 sessions with #click<=34. Have 505364 session buys. (ratio:5.473%)
+There are 9245200 sessions with #click<=51. Have 508587 session buys. (ratio:5.501%)
+There are 9248551 sessions with #click<=77. Have 509452 session buys. (ratio:5.508%)
+There are 9249437 sessions with #click<=115. Have 509640 session buys. (ratio:5.510%)
+There are 9249664 sessions with #click<=173. Have 509684 session buys. (ratio:5.510%)
+There are 9249727 sessions with #click<=259. Have 509696 session buys. (ratio:5.510%)
