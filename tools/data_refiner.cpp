@@ -28,7 +28,7 @@ int thres_se = 1, thres_it = 0;
 map<unsigned int,int> beclick_mp;
 
 bool comp_func(ClickInfo ci) {
-    return beclick_mp.at(ci.item_id)<=thres_it;
+    return beclick_mp[ci.item_id]<=thres_it;
 }
 
 int main(int argc, char **argv) {
