@@ -16,12 +16,7 @@ CATE_OFF=Y_OFF+Y_LEN;
 CATE_LEN=4;
 
 class ClickInfo:
-    def __init__(self):
-        self.date = -1
-        self.cate = -1
-        self.item_id = -1
-
-    def __init__(self, date, cate, item_id):
+    def __init__(self, date=-1, cate=-1, item_id=-1):
         self.date = date
         self.cate = cate
         self.item_id = item_id
@@ -52,12 +47,7 @@ class ClickInfo:
         return ((self.date>>Y_OFF)&((1<<Y_LEN)-1))+2014
 
 class BuyInfo:
-    def __init__(self):
-        self.date = -1
-        self.item_id = -1
-        self.price = -1
-        self.quantity = -1
-    def __init__(self, date, item_id, price, quantity):
+    def __init__(self, date=-1, item_id=-1, price=-1, quantity=-1):
         self.date = date
         self.item_id = item_id
         self.price = price
