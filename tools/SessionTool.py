@@ -21,7 +21,7 @@ class ClickInfo:
         self.cate = -1
         self.item_id = -1
 
-    def __init__(self, date, cate, item_id):
+    def __init__(self, date=-1, cate=-1, item_id=-1):
         self.date = date
         self.cate = cate
         self.item_id = item_id
