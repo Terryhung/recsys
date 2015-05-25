@@ -91,10 +91,11 @@
         a1/all = 0.222587
     only "spec offer" is bad this time.
 
-11. a1/all = 0.249695 , (a1 p1) / (a0 p1) = 0.760697 , refine(8, 4096)
-    Using feature "cate bits" with liblinear on refine(8, 4096)
+11. Let's see influence of "better refine".
+    All using feature "cate bits" with liblinear
+
+    a1/all = 0.249695 , (a1 p1) / (a0 p1) = 0.760697 , refine(8, 4096)
         Accuracy = 73.8805% (40604/54959)
-        ./tools/result_01_grid $liblinearprefix-valid.dat res.txt
                   predict 0   predict 1
         answer 0      38595        2641
         answer 1      11714        2009
@@ -102,14 +103,56 @@
         #answer 1 = 13723
         a1/all = 0.249695
 
-12. a1/all = 0.307224 , (a1 p1) / (a0 p1) = 0.648188 , refine(32, 512)
+    a1/all = 0.307224 , (a1 p1) / (a0 p1) = 0.648188 , refine(32, 512)
         Accuracy = 62.5812% (1542/2464)
-        ./tools/result_01_grid $liblinearprefix-valid.dat res.txt
                   predict 0   predict 1
         answer 0       1238         469
         answer 1        453         304
         (a1 p1) / (a0 p1) = 0.648188   (>1 then get positive score)
         #answer 1 = 757
         a1/all = 0.307224
+
+    a1/all = 0.215696 , (a1 p1) / (a0 p1) = 0.626311 , refine(8, 512)
+        Accuracy = 76.3994% (73730/96506)
+                  predict 0   predict 1
+        answer 0      70445        5245
+        answer 1      17531        3285
+        (a1 p1) / (a0 p1) = 0.626311   (>1 then get positive score)
+        #answer 1 = 20816
+        a1/all = 0.215696
+
+    a1/all = 0.136358 , (a1 p1) / (a0 p1) = 0.431380 , refine(4, 512)
+        Accuracy = 85.1084% (286155/336224)
+                  predict 0   predict 1
+        answer 0     282952        7425
+        answer 1      42644        3203
+        (a1 p1) / (a0 p1) = 0.431380   (>1 then get positive score)
+        #answer 1 = 45847
+        a1/all = 0.136358
+
+12. About refine and #buy
+    no refine
+        There are 1259710 sessions with #click<=2. Have 22363 session buys. (ratio:1.775%)
+        There are 4817797 sessions with #click<=3. Have 132320 session buys. (ratio:2.746%)
+        There are 7367044 sessions with #click<=4. Have 263666 session buys. (ratio:3.579%)
+        There are 8272853 sessions with #click<=7. Have 343021 session buys. (ratio:4.146%)
+        There are 8889767 sessions with #click<=10. Have 427024 session buys. (ratio:4.804%)
+        There are 9107161 sessions with #click<=15. Have 471541 session buys. (ratio:5.178%)
+        There are 9249727 sessions with #click<=259. Have 509696 session buys. (ratio:5.510%)
+    refine(0, 512)
+        There are 1461686 sessions with #click<=2. Have 30429 session buys. (ratio:2.082%)
+        There are 4787874 sessions with #click<=3. Have 140656 session buys. (ratio:2.938%)
+        There are 7169743 sessions with #click<=4. Have 270475 session buys. (ratio:3.772%)
+        There are 8002937 sessions with #click<=7. Have 347533 session buys. (ratio:4.343%)
+        There are 8556376 sessions with #click<=10. Have 427320 session buys. (ratio:4.994%)
+        There are 8852719 sessions with #click<=259. Have 499628 session buys. (ratio:5.644%)
+    refine(4, 512)
+        There are 833193 sessions with #click<=7. Have 77058 session buys. (ratio:9.249%)
+        There are 1386632 sessions with #click<=10. Have 156845 session buys. (ratio:11.311%)
+        There are 1572588 sessions with #click<=15. Have 197503 session buys. (ratio:12.559%)
+        There are 1644360 sessions with #click<=23. Have 217357 session buys. (ratio:13.218%)
+        There are 1682975 sessions with #click<=259. Have 229153 session buys. (ratio:13.616%)
+    So with no refine data, we can pick threshold = 2 => most buying are included.
+    refine(0, 512) is good. Since it's merely deleted buying data with #feat/=4 .
 
 
