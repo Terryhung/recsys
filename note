@@ -113,3 +113,24 @@
         a1/all = 0.307224
 
 
+13. a1/all = 0.136358 ,   (a1 p1) / (a0 p1) = 0.667087 , refine(4, 512)
+    a1/all = 0.249695 ,   (a1 p1) / (a0 p1) = 0.692918 , refine(8, 4096)
+    Using feature "cate bits, num be click" with liblinear on refine(4, 512)
+        Accuracy = 85.9716% (289057/336224)
+	          predict 0   predict 1
+        answer 0     286412        3965
+        answer 1      43202        2645
+        (a1 p1) / (a0 p1) = 0.667087   (>1 then get positive score)
+        #answer 1 = 45847
+        1/all = 0.136358
+
+        Accuracy = 73.1291% (40191/54959)
+                predict 0   predict 1
+        answer 0      37833        3403
+        answer 1      11365        2358
+        (a1 p1) / (a0 p1) = 0.692918   (>1 then get positive score)
+        #answer 1 = 13723
+        a1/all = 0.249695
+
+
+
